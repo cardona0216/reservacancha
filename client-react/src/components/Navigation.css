@@ -43,4 +43,12 @@
   .sidebar-link:hover {
     background-color: #575757;
   }
+
+  .punter{
+    cursor: pointer;
+  }
+
+  body{
+    background-color: rgb(225, 0, 255);
+  }
   
