@@ -40,19 +40,13 @@ def login(request):
 def register(request):
     serializer = UserSerializer(data=request.data)
     if serializer.is_valid():
-        serializer.save()
+        user = serializer.save()
+        if serializer.validated_data.get('is_superuser', False):
+            user.is_superuser = True
+            user.is_staff = True
+            user.save()
 
-        user = User.objects.get(username=serializer.data['username'])
-        user.set_password(serializer.data['password'])
-        user.save()
-
-        token = Token.objects.create(user=user)
-
-        return Response({'token': token.key, 'user':serializer.data}, status=status.HTTP_201_CREATED)
-
-
-
-   
+        return Response({'message': 'User created successfully'}, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['POST'])
