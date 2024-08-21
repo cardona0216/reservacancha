@@ -31,9 +31,9 @@ function App() {
   }
 
   return (
-    <div className="flex bg-blue-500 bg-opacity-100 min-h-screen bg-cover bg-center" style={{ backgroundImage: "url('src/assets/cancha.jpg')" }}>
+    <div className="flex flex-col min-h-screen">
       {isAuthenticated && <Navigation handleLogout={handleLogout} />}
-      <main className="flex justify-space-around items-center min-h-screen px-5 py-5">
+      <main className="flex-grow bg-blue-500 bg-opacity-100 bg-cover bg-center" style={{ backgroundImage: "url('src/assets/cancha.jpg')" }}>
         <Routes>
           <Route
             path='/'

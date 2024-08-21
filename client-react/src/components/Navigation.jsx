@@ -23,7 +23,7 @@ export function Navigation({ handleLogout }) {
           <Link to="/tasks-create" className="sidebar-link">Crear Reserva</Link>
         </li>
         <li className="sidebar-item">
-          <button onClick={logout} className="sidebar-link">Logout</button>
+          <button onClick={logout} className="sidebar-link">Cerrar sesión</button>
         </li>
       </ul>
     </nav>

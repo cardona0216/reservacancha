@@ -25,7 +25,7 @@ const Register = () => {
       setError('');
       setTimeout(() => {
         navigate('/login');
-      }, 1000);  // Redirige después de 2 segundos para mostrar el mensaje de éxito
+      }, 500);  // Redirige después de 2 segundos para mostrar el mensaje de éxito
       console.log(response.data);
     } catch (error) {
       if (error.response && error.response.data) {

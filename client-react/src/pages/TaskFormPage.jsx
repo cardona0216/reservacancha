@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { createTask, deleteTasks, updateTask , getTask } from "../api/tasks.api";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-hot-toast";
+import '../styles/Formulario.css'
 
 export function TasksFormPage() {
 
@@ -55,7 +56,7 @@ useEffect(() => {
   loadTask()
 }, [])
     return (
-      <div className="flex-1 p-4">
+      <div className=" formulario flex-1 p-4">
         <form onSubmit={onSubmit}>
           <input style={{color:'black'}} type="text" placeholder="titulo"
            className="border p-2 w-full mb-2"

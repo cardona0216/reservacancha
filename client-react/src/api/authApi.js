@@ -9,3 +9,4 @@ const authApi = axios.create({
 export const login = (credentials) => {
     return authApi.post('/login', credentials)
 }
+
