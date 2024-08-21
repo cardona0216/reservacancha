@@ -7,6 +7,7 @@ import { Toaster } from 'react-hot-toast';
 import Login from './pages/Login';
 import Register from './pages/Register';
 
+
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [loading, setLoading] = useState(true); // Para manejar la pantalla de carga
@@ -30,9 +31,9 @@ function App() {
   }
 
   return (
-    <div style={{ display: 'flex' }}>
+    <div className="flex bg-blue-500 bg-opacity-100 min-h-screen bg-cover bg-center" style={{ backgroundImage: "url('src/assets/cancha.jpg')" }}>
       {isAuthenticated && <Navigation handleLogout={handleLogout} />}
-      <main style={{ marginLeft: '350px', padding: '20px', flexGrow: 1 }}>
+      <main className="flex justify-space-around items-center min-h-screen px-5 py-5">
         <Routes>
           <Route
             path='/'

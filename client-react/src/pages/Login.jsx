@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { login } from "../api/authApi";
+import '../styles/Login.css'
 
 const Login = ({ setIsAuthenticated }) => {
   const [username, setUsername] = useState('');
@@ -24,13 +25,13 @@ const Login = ({ setIsAuthenticated }) => {
       // Redirigir a tasks
       navigate('/tasks');
     } catch  {
-      setError('Usuario invalido o contarseña');
+      setError('Contraseña o Usuario invalido');
     }
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100" style={{ background: 'red' }}>
-      <div className="w-full max-w-md bg-white p-8 rounded-lg shadow-md">
+    <div className="flex items-center justify-center min-h-screen bg-gray-90 overflow-hidden">
+      <div  className=" login w-full max-w-md bg-white p-8 rounded-lg shadow-md">
       <img src="src/assets/cancha.jpg" alt="Descripción de la imagen" />
         <h2 className="text-2xl font-bold text-center mb-6">Login</h2>
         <form onSubmit={Login}>
@@ -65,7 +66,7 @@ const Login = ({ setIsAuthenticated }) => {
           </button>
         </form>
         <div className="text-center mt-4">
-          <p>Dont have an account? <a href="/register" className="text-blue-500 hover:underline">Register here</a></p>
+          <p><strong style={{color:'purple'}}>No tienes Cuenta?</strong> <a style={{color:'purple'}} href="/register" className="text-blue-500 hover:underline">Registrate aqui!</a></p>
         </div>
       </div>
     </div>

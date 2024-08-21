@@ -28,9 +28,28 @@ const Register = () => {
       }, 1000);  // Redirige después de 2 segundos para mostrar el mensaje de éxito
       console.log(response.data);
     } catch (error) {
-      setError('Registration failed');
-      setSuccess('');
-      console.error(error.response.data);
+      if (error.response && error.response.data) {
+        const { username: usernameErrors, email: emailErrors } = error.response.data;
+        
+        let errorMessage = '';
+
+        // Verificar y agregar errores de username
+        if (usernameErrors && usernameErrors.length > 0) {
+          errorMessage += usernameErrors[0] + ' ';
+        }
+
+        // Verificar y agregar errores de email
+        if (emailErrors && emailErrors.length > 0) {
+          errorMessage += emailErrors[0] + ' ';
+        }
+
+        // Establecer el mensaje de error
+        setError(errorMessage.trim() || 'Ocurrió un error.');
+        setSuccess('');
+      } else {
+        setError('An error occurred');
+      }
+      // console.error(error.response.data);
     }
   };
 
@@ -79,14 +98,17 @@ const Register = () => {
               required
             />
           </div>
+         
           <button
             type="submit"
             className="w-full bg-indigo-500 text-white py-2 px-4 rounded-lg hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-500"
           >
             Register
           </button>
+          {error && <p className="text-red-500 mb-4">{error}</p>}
+          {success && <p className="text-green-500 mb-4">{success}</p>}
         </form>
-        {error && <p className="text-red-500 text-sm mt-4">{error}</p>}
+       
         {success && <p className="text-green-500 text-sm mt-4">{success}</p>}
       </div>
     </div>

@@ -1,16 +1,10 @@
 
 import PropTypes from 'prop-types';
 import { Link, useNavigate } from 'react-router-dom';
+import '../styles/Navigation.css'
 
 export function Navigation({ handleLogout }) {
   const navigate = useNavigate(); // Llama a useNavigate dentro del componente
-
-  // const logout1 = () => {
-  //   localStorage.removeItem('token'); // Elimina el token de autenticación
-  //   handleLogout(); // Llama a la función pasada como prop para actualizar el estado de autenticación
-  //   navigate('/login'); // Redirige al usuario a la página de login
-  // };
-
   const logout = () => {
     handleLogout();  // Llama a la función pasada como prop
     navigate('/login'); // Redirige al usuario a la página de login
