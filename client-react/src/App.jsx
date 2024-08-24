@@ -6,17 +6,25 @@ import { Navigation } from './components/Navigation';
 import { Toaster } from 'react-hot-toast';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import { getUserProfile } from './api/profileApi';
 
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  // el que esta loguedo
+  const [ user , setUser] = useState( null);
   const [loading, setLoading] = useState(true); // Para manejar la pantalla de carga
   const navigate = useNavigate(); // Hook para redirigir al login
 
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (token) {
-      setIsAuthenticated(true);
+        setIsAuthenticated(true);
+        getUserProfile(token).then((userData) => {
+          console.log(userData);
+          
+          setUser(userData)
+        })
     }
     setLoading(false);
   }, []);
@@ -24,6 +32,7 @@ function App() {
   const handleLogout = () => {
     localStorage.removeItem('token');
     setIsAuthenticated(false);
+    setUser(null);
     navigate('/login'); // Redirigir al login después de cerrar sesión
   };
   if (loading) {
@@ -32,33 +41,15 @@ function App() {
 
   return (
     <div className="flex flex-col min-h-screen">
-      {isAuthenticated && <Navigation handleLogout={handleLogout} />}
+      {isAuthenticated && <Navigation handleLogout={handleLogout} user={user}  />}
       <main className="flex-grow bg-blue-500 bg-opacity-100 bg-cover bg-center" style={{ backgroundImage: "url('src/assets/cancha.jpg')" }}>
         <Routes>
-          <Route
-            path='/'
-            element={isAuthenticated ? <Navigate to='/tasks' /> : <Navigate to='/login' />}
-          />
-          <Route
-            path='/tasks'
-            element={isAuthenticated ? <TasksPage /> : <Navigate to='/login' />}
-          />
-          <Route
-            path='/tasks-create'
-            element={isAuthenticated ? <TasksFormPage /> : <Navigate to='/login' />}
-          />
-          <Route
-            path='/tasks/:id'
-            element={isAuthenticated ? <TasksFormPage /> : <Navigate to='/login' />}
-          />
-          <Route
-            path='/login'
-            element={isAuthenticated ? <Navigate to='/tasks' /> : <Login setIsAuthenticated={setIsAuthenticated} />}
-          />
-          <Route
-            path='/register'
-            element={<Register />}
-          />
+          <Route path='/' element={isAuthenticated ? <Navigate to='/tasks' /> : <Navigate to='/login'/>}/>
+          <Route path='/tasks' element={isAuthenticated ? <TasksPage /> : <Navigate to='/login' />}/>
+          <Route path='/tasks-create' element={isAuthenticated ? <TasksFormPage /> : <Navigate to='/login' />}/>
+          <Route path='/tasks/:id' element={isAuthenticated ? <TasksFormPage /> : <Navigate to='/login' />}/>
+          <Route path='/login' element={isAuthenticated ? <Navigate to='/tasks' /> : <Login setIsAuthenticated={setIsAuthenticated} setUser={setUser} />}/>
+          <Route path='/register' element={<Register />}/>
         </Routes>
       </main>
       <Toaster />

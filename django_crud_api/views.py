@@ -16,24 +16,19 @@ from django.contrib.auth import authenticate
 def login(request):
     username = request.data.get('username')
     password = request.data.get('password')
-
-    # Validar que los datos necesarios están presentes
     if not username or not password:
         return Response({'error': 'Username and password are required'}, status=status.HTTP_400_BAD_REQUEST)
-
-    # Autenticación del usuario
     user = authenticate(username=username, password=password)
-
     if user is None:
+        return Response({'error': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
         return Response({'error': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
 
     # Crear o recuperar el token
+        return Response({'error': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)  
+
+    # Crear o recuperar el token
     token, created = Token.objects.get_or_create(user=user)
-
-    # Serializar los datos del usuario
     serializer = UserSerializer(instance=user)
-
-    # Devolver el token y los datos del usuario
     return Response({'token': token.key, 'user': serializer.data}, status=status.HTTP_200_OK)
 
 @api_view(['POST'])
@@ -55,6 +50,6 @@ def register(request):
 def profile(request):
     print(request.user)
     user = request.user
-    return Response(f"Estás logueado con {user.username}". format(request.user.username),
+    return Response(f"{user.username}". format(request.user.username),
                     status=status.HTTP_200_OK)
 

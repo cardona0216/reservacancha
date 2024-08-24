@@ -22,6 +22,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('tasks/', include('tasks.urls')),
     path('login', views.login),
-    path('register/', views.register, name='register'),
+    path('register', views.register),
     re_path('profile', views.profile),
 ]

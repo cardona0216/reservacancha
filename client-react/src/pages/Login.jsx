@@ -4,8 +4,9 @@ import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { login } from "../api/authApi";
 import '../styles/Login.css'
+import { getUserProfile } from '../api/profileApi';
 
-const Login = ({ setIsAuthenticated }) => {
+const Login = ({ setIsAuthenticated, setUser  }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -21,6 +22,10 @@ const Login = ({ setIsAuthenticated }) => {
 
       // Cambiar el estado de autenticación
       setIsAuthenticated(true);
+
+       // Obtener el perfil del usuario inmediatamente después de iniciar sesión
+       const userData = await getUserProfile(response.data.token);
+       setUser(userData); // Actualizar el estado con el perfil del usuario
 
       // Redirigir a tasks
       navigate('/tasks');
@@ -75,6 +80,8 @@ const Login = ({ setIsAuthenticated }) => {
 
 Login.propTypes = {
   setIsAuthenticated: PropTypes.func.isRequired,
+  setUser: PropTypes.func.isRequired,
+
 };
 
 export default Login;

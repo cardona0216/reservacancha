@@ -1,6 +1,7 @@
-import axios from 'axios';
+
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { register } from '../api/authApi';
 
 const Register = () => {
   const [username, setUsername] = useState('');
@@ -14,13 +15,21 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:8000/register/', {
+
+      const response = await register({
         username,
         email,
         password,
         password2,
-        is_superuser: true // Para asegurarte de que el usuario se crea con permisos de superusuario
-      });
+        is_superuser: true
+      })
+      // const response = await axios.post('http://localhost:8000/register/', {
+      //   username,
+      //   email,
+      //   password,
+      //   password2,
+      //   is_superuser: true // Para asegurarte de que el usuario se crea con permisos de superusuario
+      // });
       setSuccess('Registro exitoso.');
       setError('');
       setTimeout(() => {
