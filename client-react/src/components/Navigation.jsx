@@ -15,7 +15,6 @@ export function Navigation({ handleLogout , user }) {
   return (
     <nav className="sidebar">
       <h1 className="sidebar-title">Reserva de Cancha</h1>
-      {user && <p className="sidebar-username">Bienvenido: {user}</p>} {/* Mostrar el nombre del usuario */}
       <ul className="sidebar-menu">
         <li className="sidebar-item">
           <Link to="/tasks" className="sidebar-link">Reservas App</Link>
@@ -24,9 +23,16 @@ export function Navigation({ handleLogout , user }) {
           <Link to="/tasks-create" className="sidebar-link">Crear Reserva</Link>
         </li>
         <li className="sidebar-item">
+          <Link to="/cancha" className="sidebar-link">Canchas</Link>
+        </li>
+        <li className="sidebar-item">
+          <Link to="/reserva" className="sidebar-link">Mis reservas</Link>
+        </li>
+        <li className="sidebar-item">
           <button onClick={logout} className="sidebar-link">Cerrar sesión</button>
         </li>
       </ul>
+          {user && <p className="sidebar-username">Bienvenido: {user}</p>} {/* Mostrar el nombre del usuario */}
     </nav>
   );
 }

@@ -7,6 +7,11 @@ import { Toaster } from 'react-hot-toast';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import { getUserProfile } from './api/profileApi';
+// import Card from './components/Card';
+// import Reservas from './components/Reservas';
+import CanchasList from './components/CanchasList';
+import { ListaReservas } from './components/ListaReservas';
+
 
 
 function App() {
@@ -46,10 +51,12 @@ function App() {
         <Routes>
           <Route path='/' element={isAuthenticated ? <Navigate to='/tasks' /> : <Navigate to='/login'/>}/>
           <Route path='/tasks' element={isAuthenticated ? <TasksPage /> : <Navigate to='/login' />}/>
+          <Route path='/reserva' element={isAuthenticated ? <ListaReservas /> : <Navigate to='/login' />}/>
           <Route path='/tasks-create' element={isAuthenticated ? <TasksFormPage /> : <Navigate to='/login' />}/>
           <Route path='/tasks/:id' element={isAuthenticated ? <TasksFormPage /> : <Navigate to='/login' />}/>
           <Route path='/login' element={isAuthenticated ? <Navigate to='/tasks' /> : <Login setIsAuthenticated={setIsAuthenticated} setUser={setUser} />}/>
           <Route path='/register' element={<Register />}/>
+          <Route path='/cancha' element={isAuthenticated ? <CanchasList />: <Navigate to='/login'/>}/>
         </Routes>
       </main>
       <Toaster />

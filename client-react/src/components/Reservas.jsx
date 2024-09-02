@@ -13,7 +13,7 @@ function Reservas() {
 
   return (
     <div>
-      <br />
+      <br  style={{background:'blue'}}/>
       <h1>Desde las reservas</h1>
       <div style={{ display: 'flex', flexWrap: 'wrap' }}>
         <Card 
