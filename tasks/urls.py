@@ -8,6 +8,8 @@ from tasks import views
 
 router = DefaultRouter()
 router.register(r'tarea', views.TaskView, 'task')
+router.register(r'cancha', views.CanchaViewSet,  basename='cancha')
+router.register(r'reserva', views.ReservaViewSet, basename='reserva')
 
 urlpatterns = [
     path('api/v1/', include(router.urls)),

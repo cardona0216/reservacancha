@@ -1,7 +1,7 @@
 
 from rest_framework import serializers # este paquete nos permite seleccionar los campos
 from django.contrib.auth.models import User
-from .models import Tasks
+from .models import Tasks , Cancha , Reserva
 from rest_framework.validators import ValidationError
 
 class TaskSerializer(serializers.ModelSerializer):
@@ -35,3 +35,16 @@ class UserSerializer(serializers.ModelSerializer):
         validated_data.pop('password2')
         user = User.objects.create_user(**validated_data)
         return user
+    
+
+class CanchaSerializer(serializers.ModelSerializer):
+    class Meta: 
+        model = Cancha
+        fields = '__all__'
+
+class ReservaSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Reserva
+        fields = ['id', 'cancha', 'fecha_reserva', 'hora_reserva']
+    
+    
