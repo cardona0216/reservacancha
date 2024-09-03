@@ -43,8 +43,17 @@ class CanchaSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class ReservaSerializer(serializers.ModelSerializer):
-    class Meta:
+     usuario = serializers.StringRelatedField()
+     cancha_detalle = serializers.SerializerMethodField()
+
+     class Meta:
         model = Reserva
-        fields = ['id', 'cancha', 'fecha_reserva', 'hora_reserva']
+        fields = ['id', 'cancha', 'fecha_reserva', 'hora_reserva','usuario', 'cancha_detalle' ]
+
+     def get_cancha_detalle(self, obj):
+       return{
+           'nombre':obj.cancha.nombre,
+           'ubicacion': obj.cancha.ubicacion
+       }
     
     

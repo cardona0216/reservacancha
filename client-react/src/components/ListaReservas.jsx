@@ -22,7 +22,7 @@ export function ListaReservas() {
       {
         reservas.map((reserva) => (
           
-        <ReservaCard key={reserva.id} reserva={reserva} />
+        <ReservaCard key={reserva.id} reserva={reserva} canchaId={reserva.cancha} />
       ))
       
       }

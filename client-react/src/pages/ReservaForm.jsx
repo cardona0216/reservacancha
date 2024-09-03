@@ -19,11 +19,7 @@ function ReservaForm({canchaId}) {
     const handleSubmit = async (e) => {
         e.preventDefault();
         const token = localStorage.getItem('token'); // Obtén el token de donde lo guardaste
-        console.log({
-          cancha: canchaId,
-          fecha_reserva: fechaReserva,
-          hora_reserva: horaReserva
-      });
+      
         try {
          const response =  await axios.post('http://localhost:8000/reserva/api/v1/reserva/', {
             cancha: canchaId,
@@ -92,7 +88,7 @@ function ReservaForm({canchaId}) {
             type="submit"
             className="w-full bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition duration-300"
           
-          >Reservarrr</button>
+          >Reservar</button>
           {error && <p className="mt-4 text-red-500 text-center">Error: {error}</p>}
           {success && <p className="mt-4 text-green-500 text-center">Reserva realizada con éxito!</p>}
         </form>
