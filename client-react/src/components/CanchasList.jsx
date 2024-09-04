@@ -48,6 +48,8 @@ function CanchasList() {
             <h2 className="text-xl font-semibold mb-2">{cancha.nombre}</h2>
             <p className="text-gray-300">Ubicación: {cancha.ubicacion}</p>
             <p className="text-gray-300">Capacidad: {cancha.capacidad} Jugadores</p>
+            <br />
+            <img src="src/assets/cancha.jpg" alt="" />
             <button 
             style={{marginBottom: '10px'}}
               onClick={() => handleSelectCancha(cancha)} 
@@ -55,8 +57,6 @@ function CanchasList() {
             >
               Reservar aqui
             </button>
-            <br />
-            <img src="src/assets/cancha.jpg" alt="" />
           </div>
         ))}
       <Modal

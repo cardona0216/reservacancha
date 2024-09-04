@@ -5,6 +5,7 @@ export function ReservaCard({ reserva }) {
   
     return (
         <div className="bg-gray-800 shadow-lg rounded-lg p-6 text-white">
+           <h1 style={{textAlign:'center'}}><strong style={{color:'purple', fontSize:'30px'}} >Cancha Reservada</strong> </h1> 
         {/* <h2 className="text-2xl font-bold mb-4">Reserva de cancha {reserva.cancha.nombre}</h2> */}
         <p className="text-gray-300 mb-2">Fecha: {reserva.fecha_reserva}</p>
         <p className="text-gray-300 mb-2">Hora: {reserva.hora_reserva}</p>

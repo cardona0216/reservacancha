@@ -28,7 +28,7 @@ const Login = ({ setIsAuthenticated, setUser  }) => {
        setUser(userData); // Actualizar el estado con el perfil del usuario
 
       // Redirigir a tasks
-      navigate('/tasks');
+      navigate('/cancha');
     } catch  {
       setError('Contraseña o Usuario invalido');
     }
