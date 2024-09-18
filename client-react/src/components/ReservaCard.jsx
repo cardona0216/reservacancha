@@ -1,7 +1,21 @@
 
 import PropTypes from 'prop-types';
+import { deleteReserva } from '../api/reservaApi';
+
 
 export function ReservaCard({ reserva }) {
+
+
+  const handleDelete = async () => {
+    // const acepto = window.confirm('estas seguro de eliminar!')
+    try {
+      await deleteReserva(reserva.id);
+     
+      
+    } catch (error) {
+      console.error("Error al eliminar la reserva", error);
+    }
+  };
   
     return (
         <div className="bg-gray-800 shadow-lg rounded-lg p-6 text-white">
@@ -20,7 +34,7 @@ export function ReservaCard({ reserva }) {
             Editar
           </button>
           <button
-            onClick={() => {/* Función para cancelar */}}
+            onClick={handleDelete}
             className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded"
           >
             Cancelar
@@ -34,6 +48,7 @@ export function ReservaCard({ reserva }) {
   ReservaCard.propTypes = {
     canchaId: PropTypes.number.isRequired,
     reserva: PropTypes.shape({
+       id: PropTypes.number.isRequired, // Agrega la validación del campo id aquí
         fecha_reserva: PropTypes.string.isRequired,
         hora_reserva: PropTypes.string.isRequired,
         cancha_detalle: PropTypes.shape({

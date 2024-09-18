@@ -12,9 +12,12 @@ export function ListaReservas() {
   useEffect(() => {
     const fetchReservas = async () => {
       const response = await getAllReservas();
+      console.log(response);
+      
       setReservas(response.data);
     };
     fetchReservas();
+    
   }, []);
 
   return (

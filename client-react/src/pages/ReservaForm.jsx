@@ -2,12 +2,15 @@
 import axios from 'axios';
 import {useEffect, useState} from 'react'
 import PropTypes from 'prop-types';
+import { useNavigate } from 'react-router-dom';
 
 function ReservaForm({canchaId}) {
     const [fechaReserva, setFechaReserva] = useState('');
     const [horaReserva, setHoraReserva] = useState('');
     const [error, setError] = useState(null);
     const [success, setSuccess] = useState(false);
+    const navigate = useNavigate();
+
 
     useEffect(() => {
       // Establece la fecha mínima en el campo de fecha
@@ -33,6 +36,7 @@ function ReservaForm({canchaId}) {
         });
         console.log(response.data);
           setSuccess(true);
+          navigate('/reserva')
           setError(null); // Limpia el error si la solicitud es exitosa
         } catch (error) {
             const errorMessage = error.response?.data?.detail || 'Error desconocido';

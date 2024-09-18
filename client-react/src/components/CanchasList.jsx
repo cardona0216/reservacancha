@@ -10,7 +10,7 @@ function CanchasList() {
   const [selectedCancha, setSelectedCancha] = useState(null); // Estado para almacenar la cancha seleccionada
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [modalIsOpen, setModalIsOpen] = useState(false)
+  // const [modalIsOpen, setModalIsOpen] = useState(false)
 
   useEffect(() => {
     const fetchCanchas = async () => {
@@ -31,13 +31,10 @@ function CanchasList() {
 
   const handleSelectCancha = (cancha) => {
     setSelectedCancha(cancha); // Almacena la cancha seleccionada en el estado
-    setModalIsOpen(true)
+    // setModalIsOpen(true)
   };
 
-  const closeModal= () =>{
-    setModalIsOpen(false);
-    setSelectedCancha(null)
-  };
+
 
   return (
     <div className="container mx-auto mt-8">
@@ -59,15 +56,7 @@ function CanchasList() {
             </button>
           </div>
         ))}
-      <Modal
-         isOpen={modalIsOpen}
-         onRequestClose={closeModal}
-         contentLabel="Formulario de Reserva"
-         className="modal"
-         overlayClassName="modal-overlay"
-      >
-
-      </Modal>
+   
       </div>
 
 

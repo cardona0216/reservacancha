@@ -18,3 +18,11 @@ reservaApi.interceptors.request.use(config => {
 export const getAllReservas = () => {
     return reservaApi.get('/');
 };
+
+export const getReservas = (id) => {
+    return reservaApi.get(`/${id}/`)
+}
+
+export const deleteReserva = (id) => {
+    return reservaApi.delete(`/${id}/`)
+}
