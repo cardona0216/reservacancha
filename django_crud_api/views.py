@@ -48,12 +48,19 @@ def register(request):
         return Response({'message': 'User created successfully'}, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-@api_view(['POST'])
-@authentication_classes([TokenAuthentication])
+@api_view(['POST', 'PUT'])
 @permission_classes([IsAuthenticated])
 def profile(request):
-    print(request.user)
     user = request.user
-    return Response(f"{user.username}". format(request.user.username),
-                    status=status.HTTP_200_OK)
+
+    if request.method == 'POST':
+        serializer = UserSerializer(user)
+        return Response(serializer.data)
+
+    elif request.method == 'PUT':
+        serializer = UserSerializer(user, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 

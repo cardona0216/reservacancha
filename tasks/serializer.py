@@ -19,22 +19,38 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = ['id', 'username', 'email', 'password', 'password2', 'is_superuser']
         extra_kwargs = {
-            'password': {'write_only': True},
-            'password2': {'write_only': True},
+            'password': {'write_only': True, 'required': False},
+            'password2': {'write_only': True, 'required': False},
         }
 
     def validate(self, data):
-        if data['password'] != data['password2']:
-            raise serializers.ValidationError({'password2': 'Passwords must match.'})
-    
-        if User.objects.filter(email=data['email']).exists():
-            raise serializers.ValidationError({'email': 'A user with this email already exists.'})
+        # Validación de contraseñas solo si ambos campos están presentes
+        if 'password' in data and 'password2' in data:
+            if data['password'] != data['password2']:
+                raise serializers.ValidationError({'password2': 'Passwords must match.'})
+
+        # Validación del email
+        if 'email' in data:
+            # Si self.instance está presente, excluye el usuario actual
+            if self.instance:
+                if User.objects.filter(email=data['email']).exclude(id=self.instance.id).exists():
+                    raise serializers.ValidationError({'email': 'A user with this email already exists.'})
+            else:
+                # Para la creación de usuarios, verifica si el email ya existe
+                if User.objects.filter(email=data['email']).exists():
+                    raise serializers.ValidationError({'email': 'A user with this email already exists.'})
 
         return data
     def create(self, validated_data):
         validated_data.pop('password2')
         user = User.objects.create_user(**validated_data)
         return user
+    
+    def update(self, instance, validated_data):
+        password = validated_data.pop('password', None)
+        if password:
+            instance.set_password(password)
+        return super().update(instance, validated_data)
     
 
 class CanchaSerializer(serializers.ModelSerializer):
