@@ -99,10 +99,10 @@ export function ReservaEditForm() {
               <option value="16:00">16:00</option>
               <option value="17:00">17:00</option>
               <option value="18:00">18:00</option>
-              <option value="18:00">19:00</option>
-              <option value="18:00">20:00</option>
-              <option value="18:00">21:00</option>
-              <option value="18:00">22:00</option>
+              <option value="19:00">19:00</option>
+              <option value="20:00">20:00</option>
+              <option value="21:00">21:00</option>
+              <option value="22:00">22:00</option>
             </select>
       </div>
       <button type="submit" className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">

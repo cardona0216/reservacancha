@@ -48,7 +48,7 @@ function App() {
   return (
     <div className="flex flex-col min-h-screen">
       {isAuthenticated && <Navigation handleLogout={handleLogout} user={user?.username}  />}
-      <main className="flex-grow bg-blue-500 bg-opacity-100 bg-cover bg-center" style={{ backgroundImage: "url('src/assets/cancha.jpg')" }}>
+      <main className="flex-grow bg-purple-500 bg-opacity-100 bg-cover bg-center" style={{ backgroundImage: "url('src/assets/cancha.jpg')" }}>
         <Routes>
           <Route path='/' element={isAuthenticated ? <Navigate to='/cancha' /> : <Navigate to='/login'/>}/>
           <Route path='/login' element={isAuthenticated ? <Navigate to='/cancha' /> : <Login setIsAuthenticated={setIsAuthenticated} setUser={setUser} />}/>
