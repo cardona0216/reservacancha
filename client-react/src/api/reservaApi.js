@@ -26,3 +26,24 @@ export const getReservas = (id) => {
 export const deleteReserva = (id) => {
     return reservaApi.delete(`/${id}/`)
 }
+
+export const getReservaById = async (id) => {
+    try {
+      const response = await reservaApi.get(`${id}`);
+      return response;
+    } catch (error) {
+      console.error('Error al obtener la reserva:', error);
+      throw error;
+    }
+};
+
+export const updateReserva = async (id, reserva) => {
+    try {
+        console.log('Datos a enviar:', reserva); // Para depurar
+        const response = await reservaApi.put(`${id}/`, reserva);
+        return response;
+    } catch (error) {
+        console.error('Error al actualizar la reserva:', error.response ? error.response.data : error.message);
+        throw error;
+    }
+};

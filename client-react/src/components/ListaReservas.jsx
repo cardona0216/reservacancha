@@ -9,27 +9,35 @@ import '../styles/ListaTasks.css'
 export function ListaReservas() {
   const [reservas, setReservas] = useState([]);
 
+  const fetchReservas = async () => {
+    const response = await getAllReservas();
+    console.log('mis reservas', response);
+    
+    setReservas(response.data);
+  };
   useEffect(() => {
-    const fetchReservas = async () => {
-      const response = await getAllReservas();
-      console.log(response);
-      
-      setReservas(response.data);
-    };
     fetchReservas();
     
   }, []);
 
+   // Función para manejar la eliminación de una reserva
+   const handleDelete = () => {
+    fetchReservas(); // Vuelve a obtener las reservas después de eliminar una
+  };
+
   return (
-    <div style={{color: 'white'}} className="grid grid-cols-3 gap-3 lista" >
-      {
-        reservas.map((reserva) => (
-          
-        <ReservaCard key={reserva.id} reserva={reserva} canchaId={reserva.cancha} />
-      ))
-      
-      }
-     
+    <div style={{ marginTop:'70px'}}>
+        <h1 className='titulo-reservas'>Mis Reservas</h1>
+        <div style={{color: 'white', marginTop:'10px'}} className="grid grid-cols-3 gap-3 lista" >
+          {
+            reservas.map((reserva) => (
+              
+              <ReservaCard key={reserva.id} reserva={reserva} canchaId={reserva.cancha} onDelete={handleDelete} />
+            ))
+            
+          }
+        
+        </div>
     </div>
   );
 }
