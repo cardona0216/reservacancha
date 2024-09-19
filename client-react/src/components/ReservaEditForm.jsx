@@ -72,17 +72,22 @@ export function ReservaEditForm() {
           required 
           min={minDate} // Establecer la fecha mínima aquí
           className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-        />
+        /> 
       </div>
       <div className='mb-4'>
           <label className="block text-gray-700 text-sm font-bold mb-2">Hora de Reserva:</label>
+        <span><strong>Reservada a las:</strong> </span>
+          <input type="text"
+          value={horaReserva}
+          onChange={(e) => setHoraReserva(e.target.value)}
+           /> 
           <select 
               value={horaReserva} 
               onChange={(e) => setHoraReserva(e.target.value)} 
               required 
               className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
-              <option value="----">selecione una hora</option>
+              <option value={fechaReserva}>selecione una hora</option>
               <option value="08:00">08:00</option>
               <option value="09:00">09:00</option>
               <option value="10:00">10:00</option>
